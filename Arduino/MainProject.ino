@@ -4,10 +4,14 @@ int a;
 int pin;
 
 
-void setup(){
+void setup()
+{
+    //setup the sensors
 
 }
 
-void loop(){
+void loop()
+{
+    //loop of the codefine
     
 }
