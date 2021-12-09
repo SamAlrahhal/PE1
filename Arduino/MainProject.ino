@@ -1,6 +1,7 @@
 #include <servo.h>
 
-int sus;
+int a;
+int pin;
 
 
 void setup(){
