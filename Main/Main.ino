@@ -14,6 +14,7 @@ void loop()
     digitalWrite(pin, LOW);
     delay(500);
     leesAlles(&temVar);
+    delay(500);
 }
 
 void leesAlles(int *alles)
