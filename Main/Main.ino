@@ -66,9 +66,7 @@ void loop()
     delay(5000);
     myServo.write(0);
     digitalWrite(LED_G, LOW);
-  }
- 
- else   {
+  }else   {
     Serial.println("Access denied");
     digitalWrite(LED_R, HIGH);
     tone(BUZZER, 300);
