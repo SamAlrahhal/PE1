@@ -6,8 +6,8 @@
 
 #define SS_PIN 10
 #define RST_PIN 9
-#define LED_GREEN 4               // define green LED pin
-#define LED_RED 5                 // define red LED
+#define LED_GREEN A4               // define green LED pin
+#define LED_RED A5                 // define red LED
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 Servo myServo;                    // define servo name
 
@@ -20,7 +20,7 @@ void setup()
   myServo.write(0);   // servo start position
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
-  digitalWrite(LED_RED, HIGH); // set the red led on
+  analogWrite(LED_RED, 255); // set the red led on
   Serial.println("Put your card to the reader...");
   Serial.println();
 }
@@ -68,25 +68,25 @@ void loop()
 // turns on the green light and moves the servo motor
 void authorized()
 {
-  int beginPos = 0, endPos = 180;
+  int beginPos = 0, endPos = 90;
 
   Serial.println("Authorized access");
   Serial.println();
 
-  digitalWrite(LED_RED, LOW);
-  digitalWrite(LED_GREEN, HIGH);
+  analogWrite(LED_RED, 0);
+  analogWrite(LED_GREEN, 255);
 
   myServo.write(endPos);
   delay(3000);
   myServo.write(beginPos);
 
-  digitalWrite(LED_GREEN, LOW);
-  digitalWrite(LED_RED, HIGH);
+  analogWrite(LED_GREEN, 0);
+  analogWrite(LED_RED, 255);
 }
 
 //turns on the red light
 void unauthorized()
 {
   Serial.println("Access denied");
-  digitalWrite(LED_RED, HIGH);
+  analogWrite(LED_RED, 255);
 }
