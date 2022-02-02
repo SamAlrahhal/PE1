@@ -8,15 +8,16 @@
 #define RST_PIN 9
 #define LED_GREEN A4               // define green LED pin
 #define LED_RED A5                 // define red LED
+#define SERVO_PIN 3
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 Servo myServo;                    // define servo name
 
 void setup()
 {
-  Serial.begin(9600); // Initiate a serial communication
+  Serial.begin(9600);
   SPI.begin();        // Initiate  SPI bus
   mfrc522.PCD_Init(); // Initiate MFRC522
-  myServo.attach(3);  // servo pin
+  myServo.attach(SERVO_PIN);  // servo pin
   myServo.write(0);   // servo start position
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
