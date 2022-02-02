@@ -6,21 +6,23 @@
 
 #define SS_PIN 10
 #define RST_PIN 9
-#define LED_GREEN A4               // define green LED pin
-#define LED_RED A5                 // define red LED
+#define LED_GREEN A4 // define green LED pin
+#define LED_RED A5   // define red LED
 #define SERVO_PIN 3
+#define BIEPER A3
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 Servo myServo;                    // define servo name
 
 void setup()
 {
   Serial.begin(9600);
-  SPI.begin();        // Initiate  SPI bus
-  mfrc522.PCD_Init(); // Initiate MFRC522
-  myServo.attach(SERVO_PIN);  // servo pin
-  myServo.write(0);   // servo start position
+  SPI.begin();               // Initiate  SPI bus
+  mfrc522.PCD_Init();        // Initiate MFRC522
+  myServo.attach(SERVO_PIN); // servo pin
+  myServo.write(0);          // servo start position
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
+  pinMode(BIEPER, OUTPUT);
   analogWrite(LED_RED, 255); // set the red led on
   Serial.println("Put your card to the reader...");
   Serial.println();
@@ -41,7 +43,6 @@ void loop()
   // Show UID on serial monitor
   Serial.print("UID tag :");
   String content = "";
-  byte letter;
 
   for (byte i = 0; i < mfrc522.uid.size; i++)
   {
@@ -63,19 +64,22 @@ void loop()
   {
     unauthorized();
   }
-
 }
 
 // turns on the green light and moves the servo motor
 void authorized()
 {
-  int beginPos = 0, endPos = 90;
+  byte beginPos = 0, endPos = 90;
 
   Serial.println("Authorized access");
   Serial.println();
 
   analogWrite(LED_RED, 0);
   analogWrite(LED_GREEN, 255);
+
+  analogWrite(BIEPER, 255);
+  delay(500);
+  analogWrite(BIEPER, 0);
 
   myServo.write(endPos);
   delay(3000);
@@ -85,9 +89,17 @@ void authorized()
   analogWrite(LED_RED, 255);
 }
 
-//turns on the red light
+// turns on the red light
 void unauthorized()
 {
   Serial.println("Access denied");
-  analogWrite(LED_RED, 255);
+  for (byte i = 0; i < 3; i++)
+  {
+    analogWrite(BIEPER, 255);
+    analogWrite(LED_RED, 0);
+    delay(200);
+    analogWrite(BIEPER, 0);
+    analogWrite(LED_RED, 255);
+    delay(200);
+  }
 }
