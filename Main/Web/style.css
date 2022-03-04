@@ -1,0 +1,21 @@
+body{
+    background-color: bisque;
+}
+
+#ent{
+    float: left;
+    width: 50%;
+    
+}
+#intr{
+    float: right;
+    width: 50%;
+}
+
+
+#ent:hover{
+    background-color: aliceblue;
+}
+#intr:hover{
+    background-color: aliceblue;
+}
