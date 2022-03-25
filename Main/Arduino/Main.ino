@@ -30,12 +30,12 @@ void setup()
 
 void loop()
 {
-  // Look for new cards
+  // Is er een nieuwe kaart?
   if (!mfrc522.PICC_IsNewCardPresent())
   {
     return;
   }
-  // Select one of the cards
+  // Is die kaart leesbaar
   if (!mfrc522.PICC_ReadCardSerial())
   {
     return;
