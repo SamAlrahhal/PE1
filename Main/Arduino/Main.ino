@@ -4,6 +4,8 @@
 #include <MFRC522.h>
 #include <Servo.h>
 
+#define FOUT_PIN 11
+#define JUIST_PIN 12
 #define SS_PIN 10
 #define RST_PIN 9
 #define LED_GREEN A4 // define green LED pin
@@ -23,9 +25,17 @@ void setup()
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
   pinMode(BIEPER, OUTPUT);
+  pinMode(FOUT_PIN, OUTPUT);
+  pinMode(JUIST_PIN,OUTPUT);
   analogWrite(LED_RED, 255); // set the red led on
   Serial.println("Put your card to the reader...");
   Serial.println();
+
+  //set everything to low
+  analogWrite(LED_GREEN, LOW);
+  analogWrite(LED_RED, HIGH);
+  digitalWrite(FOUT_PIN, LOW);
+  digitalWrite(JUIST_PIN, LOW);
 }
 
 void loop()
@@ -77,9 +87,11 @@ void authorized()
   analogWrite(LED_RED, 0);
   analogWrite(LED_GREEN, 255);
 
+  digitalWrite(JUIST_PIN, HIGH);
   analogWrite(BIEPER, 255);
   delay(500);
   analogWrite(BIEPER, 0);
+  digitalWrite(JUIST_PIN, LOW);
 
   myServo.write(endPos);
   delay(3000);
@@ -102,4 +114,7 @@ void unauthorized()
     analogWrite(LED_RED, 255);
     delay(200);
   }
+  digitalWrite(FOUT_PIN, HIGH);
+  delay(500);
+  digitalWrite(FOUT_PIN, LOW)
 }
