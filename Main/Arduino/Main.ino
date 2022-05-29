@@ -54,6 +54,7 @@ void loop()
   Serial.print("UID tag :");
   String content = "";
 
+  
   for (byte i = 0; i < mfrc522.uid.size; i++)
   {
     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
@@ -66,6 +67,7 @@ void loop()
   Serial.print("Message : ");
   content.toUpperCase();
 
+  //check als de token juist is
   if (content.substring(1) == "89 B4 18 B9") // change here the UID of the card/cards that you want to give access
   {
     authorized();
@@ -76,7 +78,7 @@ void loop()
   }
 }
 
-// turns on the green light and moves the servo motor
+// turns on the green light and move the servo motor
 void authorized()
 {
   byte beginPos = 0, endPos = 90;
