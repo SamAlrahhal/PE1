@@ -118,5 +118,5 @@ void unauthorized()
   }
   digitalWrite(FOUT_PIN, HIGH);
   delay(500);
-  digitalWrite(FOUT_PIN, LOW)
+  digitalWrite(FOUT_PIN, LOW);
 }
