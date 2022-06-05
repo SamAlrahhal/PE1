@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="intrStyle.css">
-    <title>Document</title>
+    <title>RFID Logging</title>
 </head>
 <body>
     <div class="heading">
@@ -15,8 +15,33 @@
         <a href="Intr.html">
             <button id="intr">Intrusion</button>
         </a>
+
+        <div class="text">
+        <H1>INTRUSION</H1>
+        <div class="text">
+            <div id="textinhoud" class="textinhoud"></div>
+        </div>
+    </div>
     </div>
 
-    <script src="BackEnd.js"></script>
+    <script defer>
+        fetch('/Main/Web/textfiles/intrusion.txt')
+            .then(response => response.text())
+            .then(data => {
+                let shownText = "";
+                const myArray = data.split('\n\r\n');
+
+                const filePath = String.raw`${data}`;
+                console.log(`The file was uploaded from: ${ filePath }`);
+
+                myArray.forEach(function (item, index) {
+                    shownText += "<p class='bordercool'>" + item + "</p>"
+
+                });
+
+                document.getElementById("textinhoud").innerHTML = shownText;
+                console.log(data);
+            });
+    </script>
 </body>
 </html>

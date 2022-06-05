@@ -19,3 +19,20 @@ body{
 #intr:hover{
     background-color: aliceblue;
 }
+
+.text{
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    float: left;
+    width: 100%;
+
+    box-sizing: border-box;
+}
+.textinhoud{
+    white-space: pre-wrap;
+}
+.bordercool{
+    background: rgb(255, 180, 166);
+    border: 1px solid black;
+}

@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="entrStyle.css">
-    <title>Document</title>
+    <title>RFID Logging</title>
 </head>
+
 <body>
     <div class="heading">
         <a href="Entr.html">
-            <button id="ent">Entrence</button>
+            <button id="ent">Entrance</button>
         </a>
         <a href="Intr.html">
             <button id="intr">Intrusion</button>
         </a>
     </div>
 
-    <script src="BackEnd.js"></script>
+    <br>
+
+    <div class="text">
+        <H1>ENTRANCE</H1>
+        <div class="text">
+            <div id="textinhoud" class="textinhoud"></div>
+        </div>
+    </div>
+
+    <script defer>
+        fetch('/Main/Web/textfiles/entrance.txt')
+            .then(response => response.text())
+            .then(data => {
+                let shownText = "";
+                const myArray = data.split('\n\r\n');
+
+                myArray.forEach(function (item, index) {
+                    shownText += "<p class='bordercool'>" + item + "</p>"
+
+                });
+
+                document.getElementById("textinhoud").innerHTML = shownText;
+                console.log(data);
+            });
+
+    </script>
 </body>
+
 </html>
